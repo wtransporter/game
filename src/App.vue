@@ -1,26 +1,33 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+	<the-header title="Game APP"></the-header>
+	<img alt="Vue logo" src="./assets/logo.png">
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+	import TheHeader from './components/layouts/TheHeader.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+	export default {
+		name: 'App',
+		components: {
+			TheHeader
+		}
+	}
 </script>
 
 <style>
-#app {
-  font-family: 'Jost', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+	* {
+		box-sizing: border-box;
+	}
+	html {
+		font-family: 'Jost', sans-serif;
+	}
+	body {
+		margin: 0;
+	}
+	#app {
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		text-align: center;
+		color: #2c3e50;
+	}
 </style>

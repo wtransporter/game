@@ -15,11 +15,16 @@
 			healthBar() {
 				if (this.health < 0) {
 					return {
-						'width': 0 + '%',
+						width: 0 + '%',
 					}					
+				} else if (this.health < 15) {
+					return {
+						width: this.health + '%',
+						backgroundColor: '#e00000eb',
+					}
 				} else {
 					return {
-						'width': this.health + '%',
+						width: this.health + '%',
 					}
 				}
 

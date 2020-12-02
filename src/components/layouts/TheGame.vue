@@ -16,7 +16,10 @@
 			:disabled="!canUseSpecialAttack"
 			>SPECIAL ATTACK</base-button>
 
-		<base-button>HEAL</base-button>
+		<base-button
+			@click="healPlayer"
+			:disabled="!canHeal"
+		>HEAL</base-button>
 		<base-button>SURRENDER</base-button>
 
 	</section>
@@ -26,6 +29,7 @@
 			<h2 v-if="winner === 'player'">You WON !</h2>
 			<h2 v-else-if="winner === 'opponent'">You LOST !</h2>
 			<h2 v-else>It's a DRAW !</h2>
+			<base-button @click="newGame">Start NEW game ?</base-button>
 		</base-card>
 	</section>
 
@@ -47,22 +51,37 @@
 				opponentHealth: 100,
 				playerHealth: 100,
 				winner: null,
-				attackCount: 0
+				attackCount: 0,
+				healCount: 0
 			};
 		},
 		methods: {
+			healPlayer() {
+				this.healCount = 0;
+				const healValue = this.getRandomNumber(8, 19);
+				this.playerHealth += healValue;
+				this.opponentAttack();
+			},
+			newGame() {
+				this.opponentHealth = 100;
+				this.playerHealth = 100,
+				this.winner = null;
+				this.attackCount = 0;
+				this.healCount = 0;
+			},
 			specialAttack() {
 				this.attackCount = 0;
 				this.playerAttack(10, 25);
 			},
-			playerAttack(min = 5, max = 11) {
+			playerAttack(min = 4, max = 11) {
 				this.attackCount++;
+				this.healCount++;
 				const attackValue = this.getRandomNumber(min, max);
 				this.opponentHealth -= attackValue;
 				this.opponentAttack();
 			},
 			opponentAttack() {
-				const attackValue = this.getRandomNumber(6, 13);
+				const attackValue = this.getRandomNumber(7, 13);
 				this.playerHealth -= attackValue;
 			},
 			getRandomNumber(min, max) {
@@ -88,6 +107,9 @@
 		computed: {
 			canUseSpecialAttack() {
 				return this.attackCount >= 3;
+			},
+			canHeal() {
+				return this.healCount >= 4;
 			}
 		}
 	}

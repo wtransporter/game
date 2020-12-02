@@ -1,15 +1,18 @@
 <template>
 	<the-header title="Game APP"></the-header>
 	<img alt="Vue logo" src="./assets/logo.png">
+	<the-game></the-game>
 </template>
 
 <script>
-	import TheHeader from './components/layouts/TheHeader.vue'
+	import TheHeader from './components/layouts/TheHeader.vue';
+	import TheGame from './components/layouts/TheGame.vue';
 
 	export default {
 		name: 'App',
 		components: {
-			TheHeader
+			TheHeader,
+			TheGame
 		}
 	}
 </script>
@@ -30,4 +33,5 @@
 		text-align: center;
 		color: #2c3e50;
 	}
+
 </style>

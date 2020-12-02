@@ -38,9 +38,11 @@
 		height: 40px;
 		margin: 10px 0;
 		border: 1px solid rgba(39, 39, 39, 0.66);
+		border-radius: 5px;
 	}
 	.energy {
 		height: 100%;
 		background-color: #41b883;
+		border-radius: 2px;
 	}
 </style>

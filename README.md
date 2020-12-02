@@ -1,24 +1,13 @@
-# game
+# Game app
+Simple Vue game for fun.
 
 ## Project setup
+1. Download / clone project. Navigate to project folder.
+2. Install node dependencies using following command:
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+3. Start server with following command:
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

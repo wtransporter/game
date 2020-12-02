@@ -1,20 +1,30 @@
 <template>
 	<base-card>
-		<base-health>Opponent Health</base-health>
+		<base-health :health="opponentHealth">Opponent Health</base-health>
 	</base-card>
 	<base-card>
-		<base-health>Player Health</base-health>
+		<base-health :health="playerHealth">Player Health</base-health>
 	</base-card>
 
-	<div class="container">
+	<section class="container" v-if="! winner">
 
-			<base-button @click="playerAttack">ATTACK</base-button>
-			<base-button @click="playerAttack">SPECIAL ATTACK</base-button>
+		<base-button 
+			@click="playerAttack()"
+			>ATTACK</base-button>
+		<base-button>SPECIAL ATTACK</base-button>
 
-			<base-button @click="playerAttack">HEAL</base-button>
-			<base-button @click="playerAttack">SURRENDER</base-button>
+		<base-button>HEAL</base-button>
+		<base-button>SURRENDER</base-button>
 
-	</div>
+	</section>
+	<section v-else>
+		<base-card>
+			<h2>Game over !</h2>
+			<h2 v-if="winner === 'player'">You WON !</h2>
+			<h2 v-else-if="winner === 'opponent'">You LOST !</h2>
+			<h2 v-else>It's a DRAW !</h2>
+		</base-card>
+	</section>
 
 </template>
 
@@ -29,11 +39,42 @@
 			BaseHealth,
 			BaseButton
 		},
-
+		data() {
+			return {
+				opponentHealth: 100,
+				playerHealth: 100,
+				winner: null
+			};
+		},
 		methods: {
-			playerAttack() {
-
+			playerAttack(min = 4, max = 17) {
+				const attackValue = this.getRandomNumber(min, max);
+				this.opponentHealth -= attackValue;
+				this.opponentAttack();
+			},
+			opponentAttack() {
+				const attackValue = this.getRandomNumber(7, 13);
+				this.playerHealth -= attackValue;
+			},
+			getRandomNumber(min, max) {
+				return Math.floor(Math.random() * (max - min))+ min;
 			}
+		},
+		watch: {
+			playerHealth(value) {
+				if (value < 0 && this.opponentHealth < 0) {
+					this.winner = 'draw';
+				} else if (value <= 0){
+					this.winner = 'opponent';
+				}
+			},
+			opponentHealth(value) {
+				if (value < 0 && this.playerHealth < 0) {
+					this.winner = 'draw';
+				} else if (value <= 0){
+					this.winner = 'player';
+				}
+			},
 		}
 	}
 </script>

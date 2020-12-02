@@ -16,7 +16,8 @@
         justify-content: center;
         align-items: center;
         height: 80px;
-        background-color: #007791;
+        /* background-color: #007791; */
+        background-color: var(--primary);
     }
     header h3 {
         margin: 0;

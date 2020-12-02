@@ -18,6 +18,10 @@
 </script>
 
 <style>
+	:root {
+		--primary: #007791;
+		--primary-hover: #43a8be;
+	}
 	* {
 		box-sizing: border-box;
 	}

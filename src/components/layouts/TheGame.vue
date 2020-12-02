@@ -11,7 +11,10 @@
 		<base-button 
 			@click="playerAttack()"
 			>ATTACK</base-button>
-		<base-button>SPECIAL ATTACK</base-button>
+		<base-button 
+			@click="specialAttack"
+			:disabled="!canUseSpecialAttack"
+			>SPECIAL ATTACK</base-button>
 
 		<base-button>HEAL</base-button>
 		<base-button>SURRENDER</base-button>
@@ -43,17 +46,23 @@
 			return {
 				opponentHealth: 100,
 				playerHealth: 100,
-				winner: null
+				winner: null,
+				attackCount: 0
 			};
 		},
 		methods: {
-			playerAttack(min = 4, max = 17) {
+			specialAttack() {
+				this.attackCount = 0;
+				this.playerAttack(10, 25);
+			},
+			playerAttack(min = 5, max = 11) {
+				this.attackCount++;
 				const attackValue = this.getRandomNumber(min, max);
 				this.opponentHealth -= attackValue;
 				this.opponentAttack();
 			},
 			opponentAttack() {
-				const attackValue = this.getRandomNumber(7, 13);
+				const attackValue = this.getRandomNumber(6, 13);
 				this.playerHealth -= attackValue;
 			},
 			getRandomNumber(min, max) {
@@ -75,6 +84,11 @@
 					this.winner = 'player';
 				}
 			},
+		},
+		computed: {
+			canUseSpecialAttack() {
+				return this.attackCount >= 3;
+			}
 		}
 	}
 </script>

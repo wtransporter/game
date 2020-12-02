@@ -1,12 +1,12 @@
 <template>
-	<button>
+	<button :disabled="canUseSpecialAttack">
 		<slot></slot>
 	</button>
 </template>
 
 <script>
 	export default {
-
+		props: ['canUseSpecialAttack'],
 	}
 </script>
 
